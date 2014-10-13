@@ -1,0 +1,276 @@
+/* Font and Body */
+@font-face {
+  font-family: "slkscr";
+  src: url("../assets/slkscr.ttf");
+}
+
+$font-stack: "slkscr", "Andale Mono", AndaleMono, monospace;
+$primary-color: #02210A;
+
+body {
+  font: 18px $font-stack;
+  background-color: $primary-color;
+}
+
+/* Mixins */
+@mixin main-flex-item($order) {
+  order: $order;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+@mixin card-deck($x, $y) {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) $x $y no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200;
+}
+
+@mixin btn($btn-image) {
+  visibility: hidden;
+  background: url($btn-image) no-repeat;
+  border: none;
+  height: 60px;
+  width: 128px;
+  margin-bottom: 7px;
+  font-family: $font-stack;
+  font-size: 20px;
+  text-align: center;
+}
+
+@mixin btn-hover($btn-image) {
+  background: url($btn-image) no-repeat;
+  cursor: pointer;
+}
+
+@mixin btn-focus {
+  outline: 0;
+}
+
+@mixin droppable($height, $width, $t-position, $l-position) {
+  height: $height;
+  width: $width;
+  border: 4px dashed;
+  position: absolute;
+  top: $t-position;
+  left: $l-position;
+  font-color: #fff;
+  text-align: center;
+  font-size: 15px;
+  z-index: 100;
+}
+
+/* Containers */
+.main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.casino-img-container { 
+  @include main-flex-item(1);
+  margin: -1% auto;
+  content: url(../assets/casino.gif) 0px 0px;
+  height: auto;
+  width: 600px;
+}
+
+.casino-table-container { 
+  @include main-flex-item(3);
+  margin: -2% auto;
+  content: url(../assets/casino_table.gif) 0px 0px;
+  height: 500px;
+  width: auto;
+}
+
+.casino-table-container-penguin-won {
+  @include main-flex-item(3);
+  margin: -2% auto;
+  content: url(../assets/casino_table_penguin_won.gif) 0px 0px;
+  height: 500px;
+  width: auto;
+}
+
+#player-area-container {
+  @include main-flex-item(5);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 90px;
+  width: 650px;
+  align-items: center;
+}
+
+#player-coin-container {
+  order: 1;
+  width: 300px;
+  height: 40px;
+  padding-top: 10px;
+}
+
+#player-card-deck-container {
+  order: 2;
+  width: 350px;
+  height: 100px;
+}
+
+#player-card-area {
+  @include droppable(120px, 110px, 60%, 45.5%)
+}
+
+#coin-bet-area {
+  @include droppable(105px, 120px, 53%, 25%);
+  visibility: hidden;
+  border-radius: 100%;
+  padding-top: 15px;
+}
+
+/* Buttons */
+#btn-container {
+  @include main-flex-item(3);
+}
+
+.bet-btn {
+  @include btn("../assets/bet_btn.gif");
+}
+
+.bet-btn:hover {
+  @include btn-hover("../assets/bet_btn_hover.gif");
+}
+
+.bet-btn:focus {
+  @include btn-focus;
+}
+
+.reset-btn {
+  @include btn("../assets/reset_btn.gif")
+}
+
+.reset-btn:hover {
+  @include btn-hover("../assets/reset_btn_hover.gif")
+}
+
+.reset-btn:focus {
+  @include btn-focus; 
+}
+
+/* Coins */
+.coin {
+  background: url(../assets/coin.png) 0px 0px no-repeat;
+  height: 16px;
+  width: 12px;
+  float: left;
+  clear: right;
+  z-index: 200;
+  margin: -3px 3px 0px 3px;
+  -webkit-transform: translateZ(0) scale(1.5);
+  -ms-transform: translateZ(0) scale(1.5);
+  transform: translateZ(0) scale(1.5);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+/* Cards */
+#card-1 { 
+  @include card-deck(0px,0px);
+}
+
+#card-2 { 
+  @include card-deck(-32px,0px);
+}
+
+#card-3 { 
+  @include card-deck(-64px,0px);
+}
+
+#card-4 { 
+  @include card-deck(-96px,0px);
+}
+
+#card-5 { 
+  @include card-deck(-128px,0px);
+}
+
+#card-6 { 
+  @include card-deck(-160px,0px);
+}
+
+#card-7 { 
+  @include card-deck(-192px,0px);
+}
+
+#card-8 { 
+  @include card-deck(-224px,0px);
+}
+
+#card-9 { 
+  @include card-deck(-256px,0px);
+}
+
+#card-10 { 
+  @include card-deck(-288px,0px);
+}
+
+#house-card-back { 
+  @include card-deck(-320px,0px);
+  position: absolute;
+  z-index: 100;
+}
+
+/* House Card Flip */
+.card {
+  position: absolute;
+  top: 370px;
+  left: -45px;
+  z-index: 100;
+}
+
+.flip {
+  position: relative;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+.flip .card.flipped {
+  -webkit-transform: rotateY(360deg);
+  -ms-transform: rotateY(360deg);
+  transform: rotateY(360deg);
+}
+
+.flip .card {
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.flip .card .face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Message */
+.speech-bubble {
+  @include main-flex-item(2);
+  visibility: hidden;
+  position: absolute;
+  top: 25%;
+  left: 52%;
+  background: url("../assets/speech_bubble.gif") no-repeat;
+  height: 76px;
+  width: 200px;
+  z-index: 100;
+  text-align: center;
+  font-size: 16px;
+  padding: 21px 5px 0px 5px;
+}
