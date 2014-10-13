@@ -1,11 +1,11 @@
 <h2>8-bit Penguin Casino Game</h2>
 
 <h3>About</h3>
-This is a fun little game in jQuery and CSS animation using the following languages and libraries:
+This is a fun experiment in jQuery and CSS animation using the following languages and libraries:
   - jQuery/ jQuery UI
   - HTML
   - SCSS/ CSS
-  
+
 Illustrations are also all created by yours truly.
 
 <h3>How to Run Game</h3>
