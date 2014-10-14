@@ -76,7 +76,7 @@ $(function(){
 
   // Game Play //
   $(".bet-btn").on("click", function(event){
-    var houseCardValue = 1;//Math.floor(Math.random() * 10 + 1);
+    var houseCardValue = Math.floor(Math.random() * 10 + 1);
     var houseCard = "card-" + houseCardValue;
 
     $(".card").addClass("flipped", function(){
