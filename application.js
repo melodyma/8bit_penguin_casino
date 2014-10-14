@@ -31,7 +31,7 @@ $(function(){
 
         // Coin Drag-Drop to Target Droppable //
         totalBet = []
-        $("#appcoin-bet-area").droppable({
+        $("#coin-bet-area").droppable({
           accept: ".coin",
           drop: function(event, ui){
             betValue = $(ui.draggable).data("value");
