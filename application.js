@@ -1,10 +1,11 @@
 $(function(){
 
   var playerCardValue = null;
-  var totalBet = null;
-  var state = {
-    coin_placed: false,
-  }
+  var totalBet        = [];
+  var state           = { 
+    cardPlaced: false,
+    coinPlaced: false
+  };
 
   // Draggables Descriptions //
   var z = 400;
@@ -17,6 +18,29 @@ $(function(){
     start: function(event,ui) { $(this).css("z-index", z++) },
     revert: 'invalid' 
   });
+
+  // State Cases //
+  function cardPlacedOnly() {
+    if ((state.cardPlaced === true) && (state.coinPlaced === false)) {
+      $("#coin-bet-area").css("visibility", "visible");
+      $(".speech-bubble").css("visibility", "visible").text("Place a Bet");
+      $(".bet-btn").css("visibility", "hidden");
+    }
+  }
+
+  function coinPlacedOnly() {
+    if ((state.cardPlaced === false) && (state.coinPlaced === true)) {
+      $(".speech-bubble").css("visibility", "visible").text("Pick a Card");
+      $(".bet-btn").css("visibility", "hidden");
+    }
+  }
+
+  function bothPlaced() {
+    if ((state.cardPlaced === true) && (state.coinPlaced === true)) {
+      $(".bet-btn").css("visibility", "visible");
+      $(".speech-bubble").css("visibility", "visible").text("Press Bet");
+    }
+  }
 
   // Card Drag-Drop to Target Droppable //
   $("#player-card-area").droppable({
@@ -31,29 +55,33 @@ $(function(){
       });
 
       $(this).text("Placed!").css("color", "white");
+      
       if (event.bubbles) {
-        $(".speech-bubble").css("visibility", "visible").text("Place a Bet");
-        $("#coin-bet-area").css("visibility", "visible");
-
-        // Coin Drag-Drop to Target Droppable //
-        totalBet = []
-        $("#coin-bet-area").droppable({
-          accept: ".coin",
-          drop: function(event, ui){
-            var betValue = $(ui.draggable).data("value");
-            var betCoin = totalBet.push(ui.draggable[0]);
-            state.coin_placed = true;
-            $(this).text("Placed!").css("color", "white");
-            $(".bet-btn").css("visibility", "visible");
-            $(".speech-bubble").css("visibility", "visible").text("Press Bet");
-          }
-        });     
+        state.cardPlaced = true;
+        cardPlacedOnly();
+        bothPlaced();
       }
     },
     out: function(event, ui){
       $(this).droppable('option', 'accept', '.card-deck');
     }
   });
+
+  // Coin Drag-Drop to Target Droppable //
+  $("#coin-bet-area").droppable({
+    accept: ".coin",
+    drop: function(event, ui){
+      var betValue = $(ui.draggable).data("value");
+      var betCoin = totalBet.push(ui.draggable[0]);
+      $(this).text("Placed!").css("color", "white");
+
+      if (event.bubbles) {
+        state.coinPlaced = true;
+        coinPlacedOnly();
+        bothPlaced();
+      }
+    }
+  });  
 
   // Card Drag-Drop to Original Droppable //
   $("#player-card-deck-container").droppable({
@@ -62,8 +90,8 @@ $(function(){
       $("#player-card-area").text("Place Card Here").css("color", "black");
       ui.draggable.position();
       if (event.bubbles === true) {
-        $(".bet-btn").css("visibility", "hidden");
-        $(".speech-bubble").css("visibility", "visible").text("Pick a Card");
+        state.cardPlaced = false;
+        coinPlacedOnly();
       }
     }
   });
@@ -75,8 +103,8 @@ $(function(){
       $("#coin-bet-area").text("Place Bet Here").css("color", "black");
       ui.draggable.position();
       if (event.bubbles === true) {
-        $(".bet-btn").css("visibility", "hidden");
-        $(".speech-bubble").css("visibility", "visible").text("Place a Bet");
+        state.coinPlaced = false;
+        cardPlacedOnly();
       }
     }
   });
