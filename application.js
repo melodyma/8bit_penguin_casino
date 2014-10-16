@@ -23,6 +23,8 @@ $(function(){
   function cardPlacedOnly() {
     if ((state.cardPlaced === true) && (state.coinPlaced === false)) {
       $("#coin-bet-area").css("visibility", "visible");
+      showCoinBetArea();
+      $("#coin-bet-area").text("Place Bet Here").css("color", "black");
       $(".speech-bubble").css("visibility", "visible").text("Place a Bet");
       $(".bet-btn").css("visibility", "hidden");
     }
@@ -30,6 +32,7 @@ $(function(){
 
   function coinPlacedOnly() {
     if ((state.cardPlaced === false) && (state.coinPlaced === true)) {
+      $("#player-card-area").text("Place Card Here").css("color", "black");
       $(".speech-bubble").css("visibility", "visible").text("Pick a Card");
       $(".bet-btn").css("visibility", "hidden");
     }
@@ -53,14 +56,10 @@ $(function(){
         of: $(this),    
         collision: "touch"
       });
-
-      $(this).text("Placed!").css("color", "white");
-      
-      if (event.bubbles) {
-        state.cardPlaced = true;
-        cardPlacedOnly();
-        bothPlaced();
-      }
+      $(this).text("Placed!").css("color", "white"); 
+      state.cardPlaced = true;
+      cardPlacedOnly();
+      bothPlaced();
     },
     out: function(event, ui){
       $(this).droppable('option', 'accept', '.card-deck');
@@ -68,31 +67,27 @@ $(function(){
   });
 
   // Coin Drag-Drop to Target Droppable //
-  $("#coin-bet-area").droppable({
-    accept: ".coin",
-    drop: function(event, ui){
-      var betValue = $(ui.draggable).data("value");
-      var betCoin = totalBet.push(ui.draggable[0]);
-      $(this).text("Placed!").css("color", "white");
-
-      if (event.bubbles) {
+  function showCoinBetArea(){ 
+    $("#coin-bet-area").droppable({
+      accept: ".coin",
+      drop: function(event, ui){
+        var betValue = $(ui.draggable).data("value");
+        var betCoin = totalBet.push(ui.draggable[0]);
+        $(this).text("Placed!").css("color", "white");
         state.coinPlaced = true;
         coinPlacedOnly();
         bothPlaced();
       }
-    }
-  });  
+    }); 
+  } 
 
   // Card Drag-Drop to Original Droppable //
   $("#player-card-deck-container").droppable({
     accept: ".card-deck",
     drop: function(event, ui){
-      $("#player-card-area").text("Place Card Here").css("color", "black");
       ui.draggable.position();
-      if (event.bubbles === true) {
-        state.cardPlaced = false;
-        coinPlacedOnly();
-      }
+      state.cardPlaced = false;
+      coinPlacedOnly();  
     }
   });
 
@@ -100,14 +95,21 @@ $(function(){
   $("#player-coin-container").droppable({
     accept: ".coin",
     drop: function(event, ui){
-      $("#coin-bet-area").text("Place Bet Here").css("color", "black");
       ui.draggable.position();
-      if (event.bubbles === true) {
+      totalBet.pop();
+      if (totalBet.length === 0) {
         state.coinPlaced = false;
         cardPlacedOnly();
       }
     }
   });
+
+  // Add Coins on Win //
+  function addCoin(bet) {
+    for (var i = 0; i < bet; i++) {
+      $("<div>").fadeIn('slow').addClass("coin ui-draggable").appendTo("#player-coin-container");
+    }
+  }
 
   // Game Play //
   $(".bet-btn").on("click", function(event){
@@ -119,18 +121,18 @@ $(function(){
     });
 
     setTimeout(function(){
-      if (playerCardValue == houseCardValue){
+      if (playerCardValue === houseCardValue) {
         $(".speech-bubble").text("MEH. U GOT LUCKY.").css("color", "green");
         var playerWinnings = (totalBet.length * 2);
-        $("<div>").addClass("coin ui-draggable").appendTo("#player-coin-container");
+        addCoin(playerWinnings);
       } else {
         $(".casino-table-container").removeClass("casino-table-container").addClass("casino-table-container-penguin-won")
         $(".speech-bubble").text("PENGUIN PWNED!").css("color", "red");
-        $(totalBet).fadeOut('slow', function() { 
-          $(this).remove(); 
-          $("#coin-bet-area").fadeOut('slow');
-        });
       }
+      $(totalBet).fadeOut('slow', function() { 
+        $(this).remove(); 
+        $("#coin-bet-area").fadeOut('slow');
+      });
     }, 500);
 
     $(this).off(event);

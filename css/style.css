@@ -53,8 +53,8 @@ body {
 
 #player-coin-container {
   order: 1;
-  width: 300px;
-  height: 40px;
+  width: 180px;
+  height: 95px;
   padding-top: 10px; }
 
 #player-card-deck-container {
@@ -140,6 +140,7 @@ body {
   clear: right;
   z-index: 200;
   margin: -3px 3px 0px 3px;
+  padding-bottom: 13px;
   -webkit-transform: translateZ(0) scale(1.5);
   -ms-transform: translateZ(0) scale(1.5);
   transform: translateZ(0) scale(1.5);
