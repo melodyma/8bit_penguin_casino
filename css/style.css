@@ -1,0 +1,313 @@
+/* Font and Body */
+@font-face {
+  font-family: "slkscr";
+  src: url("../assets/slkscr.ttf"); }
+body {
+  font: 18px "slkscr", "Andale Mono", AndaleMono, monospace;
+  background-color: #02210A; }
+
+/* Mixins */
+/* Containers */
+.main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column; }
+
+.casino-img-container {
+  order: 1;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin: -1% auto;
+  content: url(../assets/casino.gif) 0px 0px;
+  height: auto;
+  width: 600px; }
+
+.casino-table-container {
+  order: 3;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin: -2% auto;
+  content: url(../assets/casino_table.gif) 0px 0px;
+  height: 500px;
+  width: auto; }
+
+.casino-table-container-penguin-won {
+  order: 3;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin: -2% auto;
+  content: url(../assets/casino_table_penguin_won.gif) 0px 0px;
+  height: 500px;
+  width: auto; }
+
+#player-area-container {
+  order: 5;
+  -webkit-justify-content: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 90px;
+  width: 650px;
+  align-items: center; }
+
+#player-coin-container {
+  order: 1;
+  width: 180px;
+  height: 95px;
+  padding-top: 10px; }
+
+#player-card-deck-container {
+  order: 2;
+  width: 350px;
+  height: 100px; }
+
+#player-card-area {
+  height: 120px;
+  width: 110px;
+  border: 4px dashed;
+  position: absolute;
+  top: 60%;
+  left: 45.5%;
+  font-color: #fff;
+  text-align: center;
+  font-size: 15px;
+  z-index: 100; }
+
+#coin-bet-area {
+  height: 105px;
+  width: 120px;
+  border: 4px dashed;
+  position: absolute;
+  top: 53%;
+  left: 25%;
+  font-color: #fff;
+  text-align: center;
+  font-size: 15px;
+  z-index: 100;
+  visibility: hidden;
+  border-radius: 100%;
+  padding-top: 15px; }
+
+/* Buttons */
+#btn-container {
+  order: 3;
+  -webkit-justify-content: center;
+  justify-content: center; }
+
+.bet-btn {
+  visibility: hidden;
+  background: url("../assets/bet_btn.gif") no-repeat;
+  border: none;
+  height: 60px;
+  width: 128px;
+  margin-bottom: 7px;
+  font-family: "slkscr", "Andale Mono", AndaleMono, monospace;
+  font-size: 20px;
+  text-align: center; }
+
+.bet-btn:hover {
+  background: url("../assets/bet_btn_hover.gif") no-repeat;
+  cursor: pointer; }
+
+.bet-btn:focus {
+  outline: 0; }
+
+.reset-btn {
+  visibility: hidden;
+  background: url("../assets/reset_btn.gif") no-repeat;
+  border: none;
+  height: 60px;
+  width: 128px;
+  margin-bottom: 7px;
+  font-family: "slkscr", "Andale Mono", AndaleMono, monospace;
+  font-size: 20px;
+  text-align: center; }
+
+.reset-btn:hover {
+  background: url("../assets/reset_btn_hover.gif") no-repeat;
+  cursor: pointer; }
+
+.reset-btn:focus {
+  outline: 0; }
+
+/* Coins */
+.coin {
+  background: url(../assets/coin.png) 0px 0px no-repeat;
+  height: 16px;
+  width: 12px;
+  float: left;
+  clear: right;
+  z-index: 200;
+  margin: -3px 3px 0px 3px;
+  padding-bottom: 13px;
+  -webkit-transform: translateZ(0) scale(1.5);
+  -ms-transform: translateZ(0) scale(1.5);
+  transform: translateZ(0) scale(1.5);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0; }
+
+/* Cards */
+#card-1 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) 0px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-2 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -32px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-3 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -64px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-4 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -96px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-5 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -128px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-6 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -160px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-7 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -192px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-8 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -224px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-9 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -256px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#card-10 {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -288px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200; }
+
+#house-card-back {
+  height: 32px;
+  width: 30px;
+  background: url(../assets/card_sprite.png) -320px 0px no-repeat;
+  -webkit-transform: translateZ(0) scale(2.5);
+  -webkit-transform-origin: 0 0;
+  float: left;
+  clear: right;
+  z-index: 200;
+  position: absolute;
+  z-index: 100; }
+
+/* House Card Flip */
+.card {
+  position: absolute;
+  top: 370px;
+  left: -45px;
+  z-index: 100; }
+
+.flip {
+  position: relative;
+  -webkit-perspective: 1000;
+  perspective: 1000; }
+
+.flip .card.flipped {
+  -webkit-transform: rotateY(360deg);
+  -ms-transform: rotateY(360deg);
+  transform: rotateY(360deg); }
+
+.flip .card {
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+  transition: 0.5s; }
+
+.flip .card .face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+/* Message */
+.speech-bubble {
+  order: 2;
+  -webkit-justify-content: center;
+  justify-content: center;
+  visibility: hidden;
+  position: absolute;
+  top: 25%;
+  left: 52%;
+  background: url("../assets/speech_bubble.gif") no-repeat;
+  height: 76px;
+  width: 200px;
+  z-index: 100;
+  text-align: center;
+  font-size: 16px;
+  padding: 21px 5px 0px 5px; }
+
+/*# sourceMappingURL=style.css.map */
