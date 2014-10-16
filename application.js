@@ -1,5 +1,11 @@
 $(function(){
 
+  var playerCardValue = null;
+  var totalBet = null;
+  var state = {
+    coin_placed: false,
+  }
+
   // Draggables Descriptions //
   var z = 400;
   $(".card-deck").draggable({ 
@@ -34,8 +40,9 @@ $(function(){
         $("#coin-bet-area").droppable({
           accept: ".coin",
           drop: function(event, ui){
-            betValue = $(ui.draggable).data("value");
-            betCoin = totalBet.push(ui.draggable[0]);
+            var betValue = $(ui.draggable).data("value");
+            var betCoin = totalBet.push(ui.draggable[0]);
+            state.coin_placed = true;
             $(this).text("Placed!").css("color", "white");
             $(".bet-btn").css("visibility", "visible");
             $(".speech-bubble").css("visibility", "visible").text("Press Bet");
@@ -86,7 +93,7 @@ $(function(){
     setTimeout(function(){
       if (playerCardValue == houseCardValue){
         $(".speech-bubble").text("MEH. U GOT LUCKY.").css("color", "green");
-        playerWinnings = (totalBet.length * 2);
+        var playerWinnings = (totalBet.length * 2);
         $("<div>").addClass("coin ui-draggable").appendTo("#player-coin-container");
       } else {
         $(".casino-table-container").removeClass("casino-table-container").addClass("casino-table-container-penguin-won")
